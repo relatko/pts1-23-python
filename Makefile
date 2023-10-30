@@ -9,4 +9,8 @@ lint: FORCE
 format: FORCE
 	autopep8 -i azul/*.py
 	autopep8 -i test/*.py
+
+test: FORCE
+	python3 -m unittest
+
 FORCE: ;
