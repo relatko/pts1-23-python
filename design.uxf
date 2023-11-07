@@ -1,0 +1,134 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>380</x><y>450</y><w>180</w><h>90</h></coordinates><panel_attributes>/TyleSource/
+--
+take(idx: int): Tile[]
+isEmpty(): bool
+startNewRound()
+state(): string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>430</x><y>210</y><w>200</w><h>60</h></coordinates><panel_attributes>bg=blue
+Game
+--
+Manages whos turn it is.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>560</y><w>130</w><h>30</h></coordinates><panel_attributes>Factory
+bg=blue
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>520</x><y>560</y><w>100</w><h>60</h></coordinates><panel_attributes>bg=red
+TableCenter
+--
+add(tyles: Tile[])</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>300</y><w>230</w><h>140</h></coordinates><panel_attributes>Board
+bg=red
+--
+points: Points
+--
+put(destinationIdx: int, tyles: Tile[])
+finishRound(): FinishRoundResult
+endGame()
+state(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>260</y><w>40</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>440</x><y>560</y><w>100</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>80</y><w>130</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+Tile
+--
+startingPlayerTile
+redTile
+blueTile
+...
+--
+toString()
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>460</y><w>150</w><h>140</h></coordinates><panel_attributes>Bag
+bg=blue
+--
+take(count: int): Tile[]
+state(): string
+--
+This class is 
+pseudorandom.
+Make sure to isolate 
+the randomness
+in a convenient fassion.
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>680</y><w>210</w><h>100</h></coordinates><panel_attributes>bg=red
+UsedTyles
+--
+give(tiles:Tile[])
+takeAll(): Tile[]
+state(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>590</y><w>40</w><h>110</h></coordinates><panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=1</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>560</y><w>130</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>410</x><y>530</y><w>30</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>530</y><w>30</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;30</additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>320</y><w>240</w><h>90</h></coordinates><panel_attributes>bg=red
+TableArea
+--
+take(sourceIdx:int, idx: int): Tile[]
+isRoundEnd(): bool
+startNewRound()
+state(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>400</y><w>40</w><h>70</h></coordinates><panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=*</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>100</y><w>380</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+GameInterface
+--
+take(playerId: int, sourceId: int, idx: int, destinationIdx: int): bool</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>770</x><y>210</y><w>180</w><h>50</h></coordinates><panel_attributes>GameObserver
+bg=red
+--
+notifyEverybody(state:string)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>150</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>730</x><y>100</y><w>280</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+ObserverInterface
+--
+registerObserver(observer: ObserverInterface)
+cancelObserver(observer: ObserverInterface)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>820</x><y>160</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1020</x><y>100</y><w>230</w><h>70</h></coordinates><panel_attributes>ObserverInterface
+--
+notify(newState: string)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>940</x><y>160</y><w>230</w><h>100</h></coordinates><panel_attributes>lt=&lt;.
+&lt;use&gt;&gt;</panel_attributes><additional_attributes>210;10;210;80;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>210</y><w>170</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes><additional_attributes>150;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>220</y><w>320</w><h>260</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes><additional_attributes>300;10;10;10;10;240</additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>250</y><w>100</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=*</panel_attributes><additional_attributes>10;10;70;10;70;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>500</y><w>130</w><h>100</h></coordinates><panel_attributes>bg=blue
+PatternLine
+--
+capacity: int
+--
+put(tiles:Tile[])
+finishRound(): Points
+state(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>500</y><w>170</w><h>110</h></coordinates><panel_attributes>bg=red
+WallLine
+--
+-tileTypes: Tile[]
+--
+canPutTile(tyle: Tile)
+getTiles(): Optional&lt;Tile&gt;[]
+putTile(tyle: Tile): Points
+state(): string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>510</y><w>90</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>690</x><y>700</y><w>130</w><h>100</h></coordinates><panel_attributes>bg=green
+Floor
+--
+-pointPattern: Point[]
+--
+put(tiles: Tile[])
+finishRound(): Points
+state(): string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>710</x><y>590</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>590</y><w>400</w><h>130</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;110;380;110;380;10</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>730</y><w>440</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;420;10</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>450</y><w>110</w><h>90</h></coordinates><panel_attributes>lt=&lt;-
+lineUp
+m1=0..1</panel_attributes><additional_attributes>10;50;10;20;90;20;90;70;70;70</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>520</y><w>160</w><h>130</h></coordinates><panel_attributes>lt=&lt;-
+lineDown
+m1=0..1</panel_attributes><additional_attributes>10;90;10;110;90;110;90;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>430</y><w>40</w><h>90</h></coordinates><panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=*</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>830</x><y>430</y><w>40</w><h>90</h></coordinates><panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=*</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>0</y><w>260</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Datatype&gt;&gt;
+Points
+--
+_add(points1:Points, points1: Points): Points_
+toString(): string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>430</y><w>290</w><h>340</h></coordinates><panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=1</panel_attributes><additional_attributes>10;310;270;310;270;10;70;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>930</x><y>290</y><w>250</w><h>80</h></coordinates><panel_attributes>FinalPointsCalculation
+bg=red
+--
+getPoints(wall: Optional&lt;Tile&gt;[][]): Points
+--
+Feel free to decompose this class using
+composite pattern.</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>870</x><y>340</y><w>80</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>0</y><w>130</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+FinishRoundResult
+--
+normal
+gameFinished</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>930</x><y>380</y><w>330</w><h>50</h></coordinates><panel_attributes>GameFinished
+bg=red
+--
+gameFinished(wall: Optional&lt;Tile&gt;[][]): FinishTurnResult
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>870</x><y>390</y><w>80</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLNote</id><coordinates><x>380</x><y>790</y><w>230</w><h>80</h></coordinates><panel_attributes>StartingPlayer Tyle tyles are created 
+each round by TableCenter and
+removed from the game by 
+UsedTyles
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>610</y><w>30</w><h>200</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>770</y><w>200</w><h>70</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;50;180;50</additional_attributes></element></diagram>
