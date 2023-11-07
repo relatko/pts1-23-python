@@ -1,7 +1,16 @@
+PY = python3
+
+ifeq ($(OS), Windows_NT)
+    PY=python
+endif
+
+all: check test lint
+
 check_and_test: FORCE
 	mypy azul --strict
 	mypy test --strict
-	python3 -m unittest 
+	$(PY) -m unittest 
+
 lint: FORCE
 	pylint azul/
 	pylint test/
@@ -11,6 +20,10 @@ format: FORCE
 	autopep8 -i test/*.py
 
 test: FORCE
-	python3 -m unittest
+	$(PY) -m unittest
+
+check: FORCE
+	mypy azul --strict
+	mypy test --strict
 
 FORCE: ;
