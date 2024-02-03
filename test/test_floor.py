@@ -11,7 +11,7 @@ class TestFloor(unittest.TestCase):
     def setUp(self) -> None:
         self.used_tiles: FakeGiveTiles = FakeGiveTiles()
         self.floor: Floor = Floor(
-            [Points(1), Points(2), Points(2)], self.used_tiles)
+            [Points(-1), Points(-2), Points(-2)], self.used_tiles)
 
     def state(self) -> Any:
         return json.loads(self.floor.state())
@@ -22,7 +22,7 @@ class TestFloor(unittest.TestCase):
         self.floor.give(tiles)
         self.assertCountEqual(self.state(), "SRRG")
         points: Points = self.floor.finish_round()
-        self.assertEqual(str(points), "7")
+        self.assertEqual(str(points), "-7")
         self.assertCountEqual(tiles, self.used_tiles.tiles_given)
         self.assertCountEqual(self.state(), "")
         tiles2 = [RED, GREEN]
@@ -33,7 +33,7 @@ class TestFloor(unittest.TestCase):
         self.floor.give([])
         self.assertCountEqual(self.state(), "RG")
         points2: Points = self.floor.finish_round()
-        self.assertEqual(str(points2), "3")
+        self.assertEqual(str(points2), "-3")
         self.assertCountEqual(tiles+tiles2, self.used_tiles.tiles_given)
         self.assertEqual(self.state(), "")
 

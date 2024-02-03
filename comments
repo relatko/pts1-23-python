@@ -36,4 +36,7 @@ Back to Bag
 I removed fancy decorators and made RandomTake class be aware of all tiles taken.
 
 
+PatternLine
+
+Her it was mostly about getting everything right. Note that even when I don't need it, I still added an interface between PatternLine and Floor. Consistency + it slightly improves documentation.
 

@@ -75,3 +75,11 @@ class NotifyEverybodyInterface:
 class FloorInterface(StateInterface, GiveTilesInterface):
     def finish_round(self) -> Points:
         pass
+
+
+class PatternLineWallLineInterface:
+    def can_put_tile(self, tile: Tile) -> bool:
+        pass
+
+    def put_tile(self, tile: Tile) -> Points:
+        pass
