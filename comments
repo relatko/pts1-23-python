@@ -31,5 +31,9 @@ The issue is, 1. does not really require an unit test, as it would not be substa
 Thus I decided to separate the code concerning whose turn it is to PlayerManager class. In my opinion, it is of little value to test the remainder of the Game class. The tests would mimic the implementation and it is almost certain that if there is an error in the implementation, the same error is in the tests. Besides that, the code will be covered very well by the integration tests. note however, that not everybody would agree with this opinion.
 
 
+Back to Bag
+
+I removed fancy decorators and made RandomTake class be aware of all tiles taken.
+
 
 
