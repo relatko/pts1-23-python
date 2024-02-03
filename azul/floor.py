@@ -2,11 +2,11 @@ from __future__ import annotations
 import json
 from typing import List
 from itertools import chain, repeat, islice
-from azul.interfaces import GiveTilesInterface
+from azul.interfaces import GiveTilesInterface, FloorInterface
 from azul.simple_types import Tile, compress_tile_list, Points
 
 
-class Floor:
+class Floor(FloorInterface):
     _point_pattern: List[Points]
     _used_tiles: GiveTilesInterface
     _tiles: List[Tile]
@@ -16,7 +16,7 @@ class Floor:
         self._used_tiles = used_tiles
         self._tiles = []
 
-    def put(self, tiles: List[Tile]) -> None:
+    def give(self, tiles: List[Tile]) -> None:
         self._tiles.extend(tiles)
 
     def finish_round(self) -> Points:

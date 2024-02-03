@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import List
-from azul.simple_types import Tile, FinishRoundResult
+from azul.simple_types import Tile, FinishRoundResult, Points
 
 
 class GiveTilesInterface:
@@ -69,4 +69,9 @@ class BoardInterface(StateInterface):
 
 class NotifyEverybodyInterface:
     def notify_everybody(self, state: str) -> None:
+        pass
+
+
+class FloorInterface(StateInterface, GiveTilesInterface):
+    def finish_round(self) -> Points:
         pass
