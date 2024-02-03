@@ -1,4 +1,5 @@
 from __future__ import annotations
+import json
 from typing import List, Final, Callable
 from azul.interfaces import TileSourceInterface, GiveTilesInterface, TakeTilesFromBagInterface
 from azul.simple_types import Tile, compress_tile_list
@@ -36,4 +37,4 @@ class Factory(TileSourceInterface):
         self._tiles = self._bag.take(Factory.MAX_NUMBER_OF_TILES)
 
     def state(self) -> str:
-        return compress_tile_list(self._tiles)
+        return json.dumps(compress_tile_list(self._tiles))

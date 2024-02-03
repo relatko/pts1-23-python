@@ -5,3 +5,17 @@ To remove dependency on Bag class we use dependency inversion. Class Factory dep
 With this it is easy to write a reasonable tests. Fake for TableCenter and UsedTiles are the same now, FakeGiveTiles. I created utils.py for reusable pieces of testing code as FakeGiveTiles. 
 
 I allowed negative indices in .take method. I think it is a bad idea but I am not sure :).
+
+
+Bag
+
+Bag needs some kind of random in itself. For unit tests of other classes, there is no problem. We use dependency injection and write tests in similar way as in Factory class. But what about the unit test of Bag class or Factory class. There are several options:
+1. Inject seed / Random object. This is a sound and very general approach, but it may be hard to write specific tests as we will be restricted by chosen seed.
+2. Mock Bag class. In this way, there will be no automated testing of Bag class, no unit test, no integration test. This is OK for very small classes but Bag contains a bit of testable code. This means that we have two kinds of code in the class - testable and untestable. Thus the class is less cohesive than it should be. This leads to third solution we want to use
+3. Split Bag class into two classes, a small untestable Random class and a larger Bag class.
+
+Second issue is that, I can see, is that we may lack control over the order in which Factories are refiled. This will in most implementation depend on the container we choose while implementing TableArea class. Thus it would be neat if the random object would know something about the caller. To reduce the impact on the system I decided to solve this using Adapter pattern. Bag.take method will have another parameter indicating who is asking for Tiles. Adapters will remove this parameter and filling it with predefined values the adapter received in the constructor (BagEndpoint).
+
+While writing tests I found out that this was not as smart of an idea as I thought. A problem appeared writing a test in the situation when Bag contained some Tiles, but not enough. The test is rather ugly. But more importantly, now, I see that the adapter class does solve the problem only partially, as it cannot resolve the situation when Bag becomes empty while filling factories. 
+
+After some thinking, it seems like the order in which factories are called should be a requirement for TableArea class, as the problem seems unavoidable otherwise. I will not implement the changes right away. I want have this version in git. Plus, I do not know how to make tests nice when Bag is refiled while filling factories. I have time to think about it while I'll be implementing other classes.

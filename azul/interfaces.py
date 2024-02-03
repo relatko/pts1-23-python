@@ -13,6 +13,16 @@ class TakeTilesFromBagInterface:
         pass
 
 
+class StateInterface:
+    def state(self) -> str:
+        pass
+
+
+class BagUsedTilesInterface(StateInterface):
+    def take_all(self) -> List[Tile]:
+        pass
+
+
 class TileSourceInterface:
     def take(self, idx: int) -> List[Tile]:
         pass

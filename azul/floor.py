@@ -1,4 +1,5 @@
 from __future__ import annotations
+import json
 from typing import List
 from itertools import chain, repeat, islice
 from azul.interfaces import GiveTilesInterface
@@ -28,4 +29,4 @@ class Floor:
         return points
 
     def state(self) -> str:
-        return compress_tile_list(self._tiles)
+        return json.dumps(compress_tile_list(self._tiles))

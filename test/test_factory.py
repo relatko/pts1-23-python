@@ -1,6 +1,7 @@
 from __future__ import annotations
 import unittest
-from typing import List
+import json
+from typing import List, Any
 from test.utils import FakeGiveTiles
 from azul.factory import Factory
 from azul.interfaces import TakeTilesFromBagInterface
@@ -20,21 +21,24 @@ class TestFactory(unittest.TestCase):
         self.bag: FakeBag = FakeBag()
         self.factory: Factory = Factory(self.bag, self.centre)
 
+    def state(self) -> Any:
+        return json.loads(self.factory.state())
+
     def test_starts_empty(self) -> None:
-        self.assertEqual(self.factory.state(), "")
+        self.assertEqual(self.state(), "")
         self.assertTrue(self.factory.is_empty())
 
     def test_can_take_and_start_new_round(self) -> None:
         self.bag.next_tiles = [RED, RED, GREEN, RED]
         self.factory.start_new_round()
         self.assertFalse(self.factory.is_empty())
-        self.assertCountEqual(self.factory.state(), "RRRG")
+        self.assertCountEqual(self.state(), "RRRG")
         self.assertEqual(self.factory.take(3), 3*[RED])
         self.assertCountEqual(self.centre.tiles_given, [GREEN])
         self.assertTrue(self.factory.is_empty())
         self.bag.next_tiles = [GREEN, RED, GREEN, RED]
         self.factory.start_new_round()
-        self.assertCountEqual(self.factory.state(), "RRGG")
+        self.assertCountEqual(self.state(), "RRGG")
         self.assertFalse(self.factory.is_empty())
 
     def test_start_new_round_incorrectly_fails(self) -> None:
