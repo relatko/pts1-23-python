@@ -19,3 +19,17 @@ Second issue is that, I can see, is that we may lack control over the order in w
 While writing tests I found out that this was not as smart of an idea as I thought. A problem appeared writing a test in the situation when Bag contained some Tiles, but not enough. The test is rather ugly. But more importantly, now, I see that the adapter class does solve the problem only partially, as it cannot resolve the situation when Bag becomes empty while filling factories. 
 
 After some thinking, it seems like the order in which factories are called should be a requirement for TableArea class, as the problem seems unavoidable otherwise. I will not implement the changes right away. I want have this version in git. Plus, I do not know how to make tests nice when Bag is refiled while filling factories. I have time to think about it while I'll be implementing other classes.
+
+
+Game
+
+The class seems like it is lacking a bit of coherence. Namely I see two distinct things.
+1. Coordination of the classes
+2. Deciding whose turn it is.
+The issue is, 1. does not really require an unit test, as it would not be substantially different from the code; 2. does. Of course as a student, I would probably ignore the issue, as there is a specific requirement for a solitary unit test of Game class; but here, I try to do the best I can. So I will try to resolve this properly.
+
+Thus I decided to separate the code concerning whose turn it is to PlayerManager class. In my opinion, it is of little value to test the remainder of the Game class. The tests would mimic the implementation and it is almost certain that if there is an error in the implementation, the same error is in the tests. Besides that, the code will be covered very well by the integration tests. note however, that not everybody would agree with this opinion.
+
+
+
+

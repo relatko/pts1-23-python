@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import List
+from enum import Enum
 
 
 class Points:
@@ -40,3 +41,8 @@ BLACK: Tile = Tile("L")
 
 def compress_tile_list(tiles: List[Tile]) -> str:
     return "".join([str(x) for x in tiles])
+
+
+class FinishRoundResult(Enum):
+    NORMAL = 1
+    GAME_FINISHED = 2

@@ -49,7 +49,8 @@ class TestBag(unittest.TestCase):
 
     def test_we_can_take_tiles_from_bag_no_remainder(self) -> None:
         self.shuffler.next_take = {
-            "1": [GREEN],  # +2*[RED, GREEN] in the remaining of the bag before refill
+            # +2*[RED, GREEN] in the remaining of the bag before refill
+            "1": [GREEN],
         }
         self.used_tiles.to_take = [RED, GREEN]
         self.assertCountEqual(self.endpoint1.take(5), 2*[RED, GREEN]+[GREEN])
