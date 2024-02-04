@@ -40,3 +40,8 @@ PatternLine
 
 Her it was mostly about getting everything right. Note that even when I don't need it, I still added an interface between PatternLine and Floor. Consistency + it slightly improves documentation.
 
+
+WallLine 
+
+I decided to implement WallLine class as I saw a lot of complicated solutions. I quite like my solution. The line_up and line_down setter assertions payed off immediately as they detected an error in tests.
+
