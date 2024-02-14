@@ -2,14 +2,14 @@ from __future__ import annotations
 import json
 from typing import List, Tuple, Final, Any
 from azul.interfaces import (
-    GameInterface, StateInterface, TableCenterInterface, BoardInterface,
+    GameInterface, StateInterface, TableAreaInterface, BoardInterface,
     NotifyEverybodyInterface)
 from azul.simple_types import Tile, FinishRoundResult, STARTING_PLAYER
 
 
 class Game(GameInterface):
     _bag: StateInterface
-    _table_area: TableCenterInterface
+    _table_area: TableAreaInterface
     _boards: List[BoardInterface]
     _observable: NotifyEverybodyInterface
     _player_manager: PlayerManager
@@ -44,7 +44,7 @@ class Game(GameInterface):
         def player_ids(self) -> List[int]:
             return self._player_ids.copy()
 
-    def __init__(self, bag: StateInterface, table_area: TableCenterInterface,
+    def __init__(self, bag: StateInterface, table_area: TableAreaInterface,
                  player_ids_and_boards: List[Tuple[int, BoardInterface]],
                  observable: NotifyEverybodyInterface):
         self._bag = bag

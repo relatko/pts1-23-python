@@ -45,7 +45,7 @@ class GameInterface:
         pass
 
 
-class TableCenterInterface(StateInterface):
+class TableAreaInterface(StateInterface):
     def take(self, source_idx: int, idx: int) -> List[Tile]:
         pass
 

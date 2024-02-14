@@ -45,3 +45,9 @@ WallLine
 
 I decided to implement WallLine class as I saw a lot of complicated solutions. I quite like my solution. The line_up and line_down setter assertions payed off immediately as they detected an error in tests.
 
+TableArea, UsedTiles, TableCenter
+
+I am using https://github.com/spitalskya/PTS1-Azul to get team part of the project. There are some differences, i have to rewrite something now and then. I am doing this mostly so I can write and run an integration tests, so I am cutting corners and not doing everything. But I made a test that validates the order in which start_new_turn is called for factories. This may e interesting to see.
+
+
+
