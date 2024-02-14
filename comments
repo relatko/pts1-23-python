@@ -47,7 +47,10 @@ I decided to implement WallLine class as I saw a lot of complicated solutions. I
 
 TableArea, UsedTiles, TableCenter
 
-I am using https://github.com/spitalskya/PTS1-Azul to get team part of the project. There are some differences, i have to rewrite something now and then. I am doing this mostly so I can write and run an integration tests, so I am cutting corners and not doing everything. But I made a test that validates the order in which start_new_turn is called for factories. This may e interesting to see.
+I am using https://github.com/spitalskya/PTS1-Azul to get team part of the project. There are some differences, i have to rewrite something now and then. I am doing this mostly so I can write and run an integration tests, so I am cutting corners and not doing everything. But I made a test that validates the order in which start_new_turn is called for factories. This may be interesting to see.
 
+GameObserver, GameFinished, FinalPointsCalculation, Board
+
+Ok, so I implemented FinalPointsCalculation. Plus some additional changes. There are probably some errors (one think I am afraid of is that I do not use ABCs), but I believe, integration test will find almost all. Again, this is not a good practice, just cutting corners to get things done in an unsound manner. Without these tests, not suitable for production even under very low risk circumstances.
 
 
