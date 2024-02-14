@@ -28,8 +28,7 @@ class TestBag(unittest.TestCase):
     def state(self) -> Any:
         return json.loads(self.bag.state())
 
-    @unittest.skip("For now")
-    def test_we_can_take_tiles_from_bag_with_remainder(self) -> None:
+    def test_we_can_take_tiles_from_bag_no_remainder(self) -> None:
         self.shuffler.next_take = [
             [RED],
             [RED, GREEN, GREEN],
@@ -45,7 +44,7 @@ class TestBag(unittest.TestCase):
         self.assertCountEqual(self.bag.take(1), [RED])
         self.assertCountEqual(self.state()["bag"], "R")
 
-    def test_we_can_take_tiles_from_bag_no_remainder(self) -> None:
+    def test_we_can_take_tiles_from_bag_with_remainder(self) -> None:
         self.shuffler.next_take = [
             2*[RED, GREEN], [GREEN],   # one take
         ]
