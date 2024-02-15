@@ -2,10 +2,11 @@ from __future__ import annotations
 import json
 from typing import List
 from azul.simple_types import Tile, compress_tile_list, Points, STARTING_PLAYER
-from azul.interfaces import FloorInterface, GiveTilesInterface, PatternLineWallLineInterface
+from azul.interfaces import (FloorInterface, GiveTilesInterface, PatternLineWallLineInterface,
+                             PatternLineInterface)
 
 
-class PatternLine:
+class PatternLine(PatternLineInterface):
     _floor: FloorInterface
     _used_tiles: GiveTilesInterface
     _wall_line: PatternLineWallLineInterface

@@ -17,6 +17,12 @@ class Points:
     def sum(points_list: List[Points]) -> Points:
         return Points(sum((x.value for x in points_list)))
 
+    @staticmethod
+    def sum_nonnegative(points_list: List[Points]) -> Points:
+        """Returns 0 instead of negative value"""
+        to_return = Points.sum(points_list)
+        return to_return if to_return.value >= 0 else Points(0)
+
     def __str__(self) -> str:
         return str(self._value)
 

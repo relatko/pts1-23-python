@@ -89,3 +89,7 @@ class Game(GameInterface):
                     board.end_game()
         self._observable.notify_everybody(self._state())
         return True
+
+    @property
+    def observable(self) -> NotifyEverybodyInterface:
+        return self._observable

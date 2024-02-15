@@ -2,11 +2,11 @@ from __future__ import annotations
 import json
 from typing import List, Tuple
 from random import Random
-from azul.interfaces import BagUsedTilesInterface, TakeTilesFromBagInterface
+from azul.interfaces import BagUsedTilesInterface, TakeTilesFromBagInterface, StateInterface
 from azul.simple_types import Tile, compress_tile_list
 
 
-class Bag(TakeTilesFromBagInterface):
+class Bag(TakeTilesFromBagInterface, StateInterface):
     _used_tiles: BagUsedTilesInterface
     _tiles: List[Tile]
 
