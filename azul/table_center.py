@@ -22,8 +22,6 @@ class TableCenter(GiveTilesInterface, TileSourceInterface):
             tile_type = self._tiles[idx]
         except IndexError:
             return []
-        if tile_type == STARTING_PLAYER:
-            return []
 
         tiles_to_give: List[Tile] = [
             tile for tile in self._tiles if tile == tile_type]

@@ -22,13 +22,14 @@ class PatternLine(PatternLineInterface):
         self._wall_line = wall_line
         self._tiles = []
 
-    def put(self, tiles: List[Tile]) -> None:
+    def give(self, tiles: List[Tile]) -> None:
         # Drop starting player stone to the floor
         self._floor.give([tile for tile in tiles if tile == STARTING_PLAYER])
         tiles = [tile for tile in tiles if tile != STARTING_PLAYER]
 
         # Check if tiles are all of the same type
-        assert tiles
+        if not tiles:
+            return
         assert all([tile == tiles[0] for tile in tiles])
 
         assert self._capacity >= len(self._tiles)
@@ -63,6 +64,5 @@ class PatternLine(PatternLineInterface):
         state = {
             "tiles": compress_tile_list(self._tiles),
             "capacity": self._capacity,
-            "floor": json.loads(self._floor.state()),
         }
         return json.dumps(state)

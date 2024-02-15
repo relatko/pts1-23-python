@@ -37,8 +37,8 @@ def create_table_area(number_of_players: int, random_take: Bag.RandomTakeInterfa
 
 WALL_TILE_PATTERN: Tuple[Tuple[Tile, ...], ...] = tuple(tuple(
     (BLUE, YELLOW, RED, BLACK, GREEN)[(i+j) % 5]
-    for i in range(4)) for j in range(4))
-no_tile: Optional[Tile] = None    # mypy can be a bit stupit with List types
+    for i in range(5)) for j in range(5))
+no_tile: Optional[Tile] = None    # mypy can be a bit stupid with List types
 WALL_STARTING_TILES: Tuple[Tuple[Optional[Tile], ...], ...] = 5*(5*(no_tile,),)
 FLOOR_POINT_PATTERN: Tuple[Points, ...] = tuple(
     Points(x) for x in 2*[-1]+3*[-2]+2*[-3])
@@ -55,13 +55,16 @@ def create_board(used_tiles: GiveTilesInterface,
         wall_lines[i+1].line_up = wall_lines[i]
     capacities = [1, 2, 3, 4, 5]
     pattern_lines: List[PatternLineInterface] = [
-        PatternLine(capacities[i], floor, used_tiles, wall_lines[i]) for i in range(4)]
-    return Board(GameFinished(), FinalPointsCalculation(), pattern_lines, list(*wall_lines), floor)
+        PatternLine(capacities[i], floor, used_tiles, wall_lines[i]) for i in range(5)]
+    # pylint: disable=unnecessary-comprehension
+    return Board(GameFinished(), FinalPointsCalculation(), pattern_lines,
+                 [_ for _ in wall_lines], floor)
 
 
-def create_game(players: List[int], random_take: Bag.RandomTakeInterface) -> GameInterface:
+def create_game(players: List[int],
+                random_take: Bag.RandomTakeInterface) -> Tuple[GameInterface, GameObservable]:
     table_area, bag, used_tiles = create_table_area(len(players), random_take)
     boards: List[Tuple[int, BoardInterface]] = [
         (index, create_board(used_tiles)) for index in players]
     observable = GameObservable()
-    return Game(bag, table_area, boards, observable)
+    return Game(bag, table_area, boards, observable), observable

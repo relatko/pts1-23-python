@@ -38,51 +38,54 @@ class TestPatternLine(unittest.TestCase):
     def state(self) -> Any:
         return json.loads(self.pattern_line.state())
 
+    def floor_state(self) -> Any:
+        return json.loads(self.floor.state())
+
     def test_starting_player_drops(self) -> None:
-        self.pattern_line.put([RED, STARTING_PLAYER])
+        self.pattern_line.give([RED, STARTING_PLAYER])
         self.assertCountEqual(self.state()["tiles"], "R")
-        self.assertCountEqual(self.state()["floor"], "S")
+        self.assertCountEqual(self.floor_state(), "S")
 
     def test_can_add_same_tile_several_times_adding_more_drops(self) -> None:
-        self.pattern_line.put([RED, RED])
+        self.pattern_line.give([RED, RED])
         self.assertCountEqual(self.state()["tiles"], "RR")
-        self.assertCountEqual(self.state()["floor"], "")
-        self.pattern_line.put([RED, RED])
+        self.assertCountEqual(self.floor_state(), "")
+        self.pattern_line.give([RED, RED])
         self.assertCountEqual(self.state()["tiles"], "RRR")
-        self.assertCountEqual(self.state()["floor"], "R")
+        self.assertCountEqual(self.floor_state(), "R")
 
     def test_adding_more_than_capacity_drops(self) -> None:
-        self.pattern_line.put(10*[RED])
+        self.pattern_line.give(10*[RED])
         self.assertCountEqual(self.state()["tiles"], "RRR")
-        self.assertCountEqual(self.state()["floor"], "RRRRRRR")
+        self.assertCountEqual(self.floor_state(), "RRRRRRR")
 
     def test_puting_of_type_not_on_the_line_drops(self) -> None:
-        self.pattern_line.put([RED, RED])
-        self.pattern_line.put([STARTING_PLAYER, GREEN])
+        self.pattern_line.give([RED, RED])
+        self.pattern_line.give([STARTING_PLAYER, GREEN])
         self.assertCountEqual(self.state()["tiles"], "RR")
-        self.assertCountEqual(self.state()["floor"], "SG")
+        self.assertCountEqual(self.floor_state(), "SG")
 
     def test_puting_tiles_not_allowed_by_walline_drops(self) -> None:
         self.wall_line.next_answer = False
-        self.pattern_line.put([STARTING_PLAYER, RED, RED])
+        self.pattern_line.give([STARTING_PLAYER, RED, RED])
         self.assertEqual(self.wall_line.last_tile_asked, RED)
         self.assertCountEqual(self.state()["tiles"], "")
-        self.assertCountEqual(self.state()["floor"], "SRR")
+        self.assertCountEqual(self.floor_state(), "SRR")
 
     def test_finish_round_works_when_line_not_full(self) -> None:
-        self.pattern_line.put([STARTING_PLAYER, RED, RED])
+        self.pattern_line.give([STARTING_PLAYER, RED, RED])
         self.assertEqual(self.pattern_line.finish_round().value, 0)
         self.assertCountEqual(self.state()["tiles"], "RR")
-        self.assertCountEqual(self.state()["floor"], "S")
+        self.assertCountEqual(self.floor_state(), "S")
         self.assertCountEqual(self.used_tiles.tiles_given, [])
 
     def test_finish_round_works_when_line_is_full(self) -> None:
-        self.pattern_line.put([STARTING_PLAYER, RED, RED])
-        self.pattern_line.put([RED, RED])
-        self.assertCountEqual(self.state()["floor"], "SR")
+        self.pattern_line.give([STARTING_PLAYER, RED, RED])
+        self.pattern_line.give([RED, RED])
+        self.assertCountEqual(self.floor_state(), "SR")
         self.assertEqual(self.pattern_line.finish_round().value, -2)
         self.assertCountEqual(self.state()["tiles"], "")
-        self.assertCountEqual(self.state()["floor"], "")
+        self.assertCountEqual(self.floor_state(), "")
         self.assertEqual(self.wall_line.last_tile_put, RED)
         # Two from line one from floor + starting player
         self.assertCountEqual(compress_tile_list(
@@ -90,7 +93,7 @@ class TestPatternLine(unittest.TestCase):
 
     def test_two_stones_of_different_colors_cause_error(self) -> None:
         with self.assertRaises(AssertionError):
-            self.pattern_line.put([GREEN, RED])
+            self.pattern_line.give([GREEN, RED])
 
 
 if __name__ == '__main__':

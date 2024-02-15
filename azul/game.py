@@ -58,7 +58,7 @@ class Game(GameInterface):
         state: Any = {
             "bag": json.loads(self._bag.state()),
             "table area": json.loads(self._table_area.state()),
-            "boads": [json.loads(board.state()) for board in self._boards],
+            "boards": [json.loads(board.state()) for board in self._boards],
             "players": self._player_manager.player_ids,
             "on turn": self._player_manager.whos_turn_it_is()[1]
         }
@@ -66,6 +66,7 @@ class Game(GameInterface):
 
     def start_game(self) -> None:
         self._table_area.start_new_round()
+        self.observable.notify_everybody(self._state())
 
     def take(self, player_id: int, source_idx: int, idx: int, destination_idx: int) -> bool:
         # check if player_id is on turn
@@ -79,15 +80,17 @@ class Game(GameInterface):
         self._player_manager.evaluate_tiles_and_move_to_next_player(taken)
 
         self._boards[board_id].put(destination_idx, taken)
+        self._observable.notify_everybody(self._state())
         if self._table_area.is_round_end():
             self._table_area.start_new_round()
             self._player_manager.start_new_round()
             finish_round_results = [board.finish_round()
                                     for board in self._boards]
+            self._observable.notify_everybody(self._state())
             if FinishRoundResult.GAME_FINISHED in finish_round_results:
                 for board in self._boards:
                     board.end_game()
-        self._observable.notify_everybody(self._state())
+                self._observable.notify_everybody(self._state())
         return True
 
     @property

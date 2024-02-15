@@ -63,7 +63,10 @@ I added factories that construct the game. Keeping in mind the desired structure
 
 Table Area and Board integration test
 
-I made one test focusing on Bag refilling. I skip Board integration test that should deal with some special cases there, like patternlines being blocked due to wallwalllines already having a tile.
+I made one test focusing on Bag refilling. I skip Board integration test that should deal with some special cases there, like patternlines being blocked due to walllines already having a tile.
 
 
+Game integration test
+
+I noticed that when all factories have the same tiles, we have an issue with not being able to take the starting player stone. Thus we should allow to take starting player stone from the center. As expected there were quite some issues. Some of easily fixable reasons are not using ABCs and having a lot of uncovered code. There are still plenty of outstanding errors. But I guess this is sufficient to show how it is possible to write tests that are well under control.
 

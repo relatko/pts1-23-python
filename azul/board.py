@@ -37,9 +37,9 @@ class Board(BoardInterface):
 
     def put(self, destination_idx: int, tiles: List[Tile]) -> None:
         """Puts tile to PatternLine.
-        :destination: 0 to 4 (top to bottom)
+        :destination: 1 to 5 (top to bottom)
         :tiles: list of tiles to put"""
-        self._pattern_lines[destination_idx].give(tiles)
+        self._pattern_lines[destination_idx-1].give(tiles)
 
     def finish_round(self) -> FinishRoundResult:
         """Adds points from pattern line, negative points from floor
@@ -58,10 +58,11 @@ class Board(BoardInterface):
             self._get_wall())
         self._points = Points.sum([self._points, final_points])
 
-    def _state(self) -> str:
+    def state(self) -> str:
         state: Any = {
             "points": self._points.value,
             "pattern lines": [json.loads(line.state()) for line in self._pattern_lines],
             "wall lines": [json.loads(line.state()) for line in self._wall_lines],
+            "floor": json.loads(self._floor.state()),
         }
         return json.dumps(state)
