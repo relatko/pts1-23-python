@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 from typing import List
+import json
 from azul.interfaces import GiveTilesInterface, TileSourceInterface
 from azul.simple_types import Tile, compress_tile_list, STARTING_PLAYER
 
@@ -43,8 +44,8 @@ class TableCenter(GiveTilesInterface, TileSourceInterface):
         assert not self._tiles
         self._tiles.append(STARTING_PLAYER)
 
-    def add(self, tiles: List[Tile]) -> None:
+    def give(self, tiles: List[Tile]) -> None:
         self._tiles.extend(tiles)
 
     def state(self) -> str:
-        return compress_tile_list(self._tiles)
+        return json.dumps(compress_tile_list(self._tiles))

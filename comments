@@ -45,12 +45,25 @@ WallLine
 
 I decided to implement WallLine class as I saw a lot of complicated solutions. I quite like my solution. The line_up and line_down setter assertions payed off immediately as they detected an error in tests.
 
+
 TableArea, UsedTiles, TableCenter
 
 I am using https://github.com/spitalskya/PTS1-Azul to get team part of the project. There are some differences, i have to rewrite something now and then. I am doing this mostly so I can write and run an integration tests, so I am cutting corners and not doing everything. But I made a test that validates the order in which start_new_turn is called for factories. This may be interesting to see.
 
+
 GameObserver, GameFinished, FinalPointsCalculation, Board
 
 Ok, so I implemented FinalPointsCalculation. Plus some additional changes. There are probably some errors (one think I am afraid of is that I do not use ABCs), but I believe, integration test will find almost all. Again, this is not a good practice, just cutting corners to get things done in an unsound manner. Without these tests, not suitable for production even under very low risk circumstances.
+
+
+Factories
+
+I added factories that construct the game. Keeping in mind the desired structure of the test, I split game construction into three parts. The parts allow for a more fine setup. In this way, it will be easier to test edge cases in the smaller integration tests and the big integration test mimics the real game as much as possible.
+
+
+Table Area and Board integration test
+
+I made one test focusing on Bag refilling. I skip Board integration test that should deal with some special cases there, like patternlines being blocked due to wallwalllines already having a tile.
+
 
 

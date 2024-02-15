@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 from typing import List
+import json
 from azul.simple_types import Tile, STARTING_PLAYER, compress_tile_list
 from azul.interfaces import BagUsedTilesInterface, GiveTilesInterface
 
@@ -28,7 +29,7 @@ class UsedTiles(BagUsedTilesInterface, GiveTilesInterface):
         return new_copy
 
     def state(self) -> str:
-        return compress_tile_list(self._tiles)
+        return json.dumps(compress_tile_list(self._tiles))
 
     def get_tiles(self) -> List[Tile]:
         return self._tiles

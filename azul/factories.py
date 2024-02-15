@@ -35,8 +35,9 @@ def create_table_area(number_of_players: int, random_take: Bag.RandomTakeInterfa
     return (table_area, bag, used_tiles)
 
 
-WALL_TILE_PATTERN: Tuple[Tuple[Tile, ...], ...] = tuple(tuple((BLUE, YELLOW, RED, BLACK, GREEN)[i+j]
-                                                              for i in range(4)) for j in range(4))
+WALL_TILE_PATTERN: Tuple[Tuple[Tile, ...], ...] = tuple(tuple(
+    (BLUE, YELLOW, RED, BLACK, GREEN)[(i+j) % 5]
+    for i in range(4)) for j in range(4))
 no_tile: Optional[Tile] = None    # mypy can be a bit stupit with List types
 WALL_STARTING_TILES: Tuple[Tuple[Optional[Tile], ...], ...] = 5*(5*(no_tile,),)
 FLOOR_POINT_PATTERN: Tuple[Points, ...] = tuple(
