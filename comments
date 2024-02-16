@@ -68,5 +68,8 @@ I made one test focusing on Bag refilling. I skip Board integration test that sh
 
 Game integration test
 
-I noticed that when all factories have the same tiles, we have an issue with not being able to take the starting player stone. Thus we should allow to take starting player stone from the center. As expected there were quite some issues. Some of easily fixable reasons are not using ABCs and having a lot of uncovered code. There are still plenty of outstanding errors. But I guess this is sufficient to show how it is possible to write tests that are well under control.
+I noticed that when all factories have the same tiles, we have an issue with not being able to take the starting player stone. Thus we should allow to take starting player stone from the center. As expected there were quite some issues. Some of easily fixable reasons are not using ABCs and having a lot of uncovered code. There are still plenty of outstanding errors. But I guess this is sufficient to show how it is possible to write tests that are well under control. ... I decided to finish the integration test so it really uses all classes. Doing this I found an error in the Game class. Refilling factories happened before end of turn on boards was handled. Note how little chance there is to find this issue in a Game class unit test. The best chance is that you look at the code second time and just notice it. But in that case you more or less found the error reviewing the code. After I found the issue, I need to guarantee that the test will find this issue in the future. 
+Linter did not like test length so I added some tools to make the test more compact. I should rewrite the other integration test too, but I will not :).
+
+
 

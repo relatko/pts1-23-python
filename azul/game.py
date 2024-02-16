@@ -13,6 +13,7 @@ class Game(GameInterface):
     _boards: List[BoardInterface]
     _observable: NotifyEverybodyInterface
     _player_manager: PlayerManager
+    _finished: bool
 
     class PlayerManager:
         _player_ids: List[int]
@@ -53,6 +54,7 @@ class Game(GameInterface):
         self._observable = observable
         player_ids = [entry[0] for entry in player_ids_and_boards]
         self._player_manager = Game.PlayerManager(player_ids)
+        self._finished = False
 
     def _state(self) -> str:
         state: Any = {
@@ -60,7 +62,8 @@ class Game(GameInterface):
             "table area": json.loads(self._table_area.state()),
             "boards": [json.loads(board.state()) for board in self._boards],
             "players": self._player_manager.player_ids,
-            "on turn": self._player_manager.whos_turn_it_is()[1]
+            "on turn": self._player_manager.whos_turn_it_is()[1],
+            "finished": self._finished,
         }
         return json.dumps(state)
 
@@ -69,6 +72,9 @@ class Game(GameInterface):
         self.observable.notify_everybody(self._state())
 
     def take(self, player_id: int, source_idx: int, idx: int, destination_idx: int) -> bool:
+        if self._finished:
+            return False
+
         # check if player_id is on turn
         player_on_turn_id, board_id = self._player_manager.whos_turn_it_is()
         if player_on_turn_id != player_id:
@@ -82,14 +88,16 @@ class Game(GameInterface):
         self._boards[board_id].put(destination_idx, taken)
         self._observable.notify_everybody(self._state())
         if self._table_area.is_round_end():
-            self._table_area.start_new_round()
-            self._player_manager.start_new_round()
             finish_round_results = [board.finish_round()
                                     for board in self._boards]
-            self._observable.notify_everybody(self._state())
             if FinishRoundResult.GAME_FINISHED in finish_round_results:
+                self._finished = True
                 for board in self._boards:
                     board.end_game()
+                self._observable.notify_everybody(self._state())
+            else:
+                self._table_area.start_new_round()
+                self._player_manager.start_new_round()
                 self._observable.notify_everybody(self._state())
         return True
 

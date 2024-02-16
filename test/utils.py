@@ -1,5 +1,5 @@
 from typing import List, Tuple
-from azul.simple_types import Tile
+from azul.simple_types import Tile, RED, GREEN, BLACK, BLUE, YELLOW
 from azul.interfaces import GiveTilesInterface
 from azul.bag import Bag
 
@@ -17,6 +17,9 @@ class FakeGiveTiles(GiveTilesInterface):
 class FakeShuffler(Bag.RandomTakeInterface):
     next_take: List[List[Tile]]
 
+    def __init__(self) -> None:
+        self.next_take = []
+
     def take(self, count: int, tiles: List[Tile]) -> Tuple[List[Tile], List[Tile]]:
         if not count:
             return ([], tiles)
@@ -30,3 +33,9 @@ class FakeShuffler(Bag.RandomTakeInterface):
             tiles.remove(tile)
 
         return we_want, tiles
+
+    def instructions(self, draws: List[str]) -> None:
+        assert not self.next_take
+        convert = {"R": RED, "G": GREEN, "B": BLUE, "L": BLACK, "Y": YELLOW}
+        for draw in draws:
+            self.next_take.append([convert[c] for c in draw])
