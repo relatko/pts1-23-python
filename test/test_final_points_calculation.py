@@ -12,7 +12,6 @@ class TestFinalPointsCalculation(unittest.TestCase):
 
     def test_get_points(self) -> None:
         test_wall: List[List[Optional[Tile]]] = [
-            # pylint: disable=bad-whitespace
             [None,  YELLOW, RED,    None,   None],
             [None,  BLUE,   YELLOW, RED,    None],
             [None,  GREEN,  BLUE,   None,   RED],
@@ -25,7 +24,6 @@ class TestFinalPointsCalculation(unittest.TestCase):
 
     def test_get_points2(self) -> None:
         test_wall: List[List[Optional[Tile]]] = [
-            # pylint: disable=bad-whitespace
             [BLUE,   YELLOW, RED,    BLACK,  GREEN],
             [GREEN,  BLUE,   YELLOW, RED,    BLACK],
             [BLACK,  GREEN,  BLUE,   YELLOW, RED],
@@ -38,7 +36,6 @@ class TestFinalPointsCalculation(unittest.TestCase):
 
     def test_get_points3(self) -> None:
         test_wall: List[List[Optional[Tile]]] = [
-            # pylint: disable=bad-whitespace
             [BLUE,  None,  RED,    BLACK,  GREEN],
             [GREEN, BLUE,  YELLOW, None,   BLACK],
             [BLACK, GREEN, None,   YELLOW, RED],

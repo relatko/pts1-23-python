@@ -1,3 +1,4 @@
+# pylint: disable=unused-argument
 from __future__ import annotations
 from typing import List, Optional
 from azul.simple_types import Tile, FinishRoundResult, Points
@@ -5,115 +6,115 @@ from azul.simple_types import Tile, FinishRoundResult, Points
 
 class GiveTilesInterface:
     def give(self, tiles: List[Tile]) -> None:
-        pass
+        assert False
 
 
 class TakeTilesFromBagInterface:
     def take(self, count: int) -> List[Tile]:
-        pass
+        assert False
 
 
 class StateInterface:
     def state(self) -> str:
-        pass
+        assert False
 
 
 class BagUsedTilesInterface(StateInterface):
     def take_all(self) -> List[Tile]:
-        pass
+        assert False
 
 
 class TileSourceInterface:
     def take(self, idx: int) -> List[Tile]:
-        pass
+        assert False
 
     def is_empty(self) -> bool:
-        pass
+        assert False
 
     def start_new_round(self) -> None:
-        pass
+        assert False
 
     def state(self) -> str:
-        pass
+        assert False
 
 
 class GameInterface:
     def start_game(self) -> None:
-        pass
+        assert False
 
     def take(self, player_id: int, source_idx: int, idx: int, destination_idx: int) -> bool:
-        pass
+        assert False
 
 
 class TableAreaInterface(StateInterface):
     def take(self, source_idx: int, idx: int) -> List[Tile]:
-        pass
+        assert False
 
     def is_round_end(self) -> bool:
-        pass
+        assert False
 
     def start_new_round(self) -> None:
-        pass
+        assert False
 
 
 class BoardInterface(StateInterface):
     def put(self, destination_idx: int, tiles: List[Tile]) -> None:
-        pass
+        assert False
 
     def finish_round(self) -> FinishRoundResult:
-        pass
+        assert False
 
     def end_game(self) -> None:
-        pass
+        assert False
 
 
 class NotifyEverybodyInterface:
     def notify_everybody(self, state: str) -> None:
-        pass
+        assert False
 
 
 class FloorInterface(StateInterface, GiveTilesInterface):
     def finish_round(self) -> Points:
-        pass
+        assert False
 
 
 class PatternLineWallLineInterface:
     def can_put_tile(self, tile: Tile) -> bool:
-        pass
+        assert False
 
     def put_tile(self, tile: Tile) -> Points:
-        pass
+        assert False
 
 
 class ObserverInterface:
     def notify(self, new_state: str) -> None:
-        pass
+        assert False
 
 
 class ObservableInterface:
     def register_observer(self, observer: ObserverInterface) -> None:
-        pass
+        assert False
 
     def cancel_observer(self, observer: ObserverInterface) -> None:
-        pass
+        assert False
 
 
 class FinalPointsCalculationInterface:
     def get_points(self, wall: List[List[Optional[Tile]]]) -> Points:
-        pass
+        assert False
 
 
 class GameFinishedInterface:
     def game_finished(self, wall: List[List[Optional[Tile]]]) -> FinishRoundResult:
-        pass
+        assert False
 
 
 class WallLineInterface(StateInterface):
     @property
     def tiles(self) -> List[Optional[Tile]]:
-        pass
+        assert False
 
 
 class PatternLineInterface(StateInterface, GiveTilesInterface):
     def finish_round(self) -> Points:
-        pass
+        assert False

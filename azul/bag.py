@@ -11,8 +11,9 @@ class Bag(TakeTilesFromBagInterface, StateInterface):
     _tiles: List[Tile]
 
     class RandomTakeInterface:
+        # pylint: disable=unused-argument
         def take(self, count: int, tiles: List[Tile]) -> Tuple[List[Tile], List[Tile]]:
-            pass
+            assert False
 
     class RandomTake(RandomTakeInterface):
         _random: Random

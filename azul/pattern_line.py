@@ -30,7 +30,7 @@ class PatternLine(PatternLineInterface):
         # Check if tiles are all of the same type
         if not tiles:
             return
-        assert all([tile == tiles[0] for tile in tiles])
+        assert all(tile == tiles[0] for tile in tiles)
 
         assert self._capacity >= len(self._tiles)
         count_to_fit = min(self._capacity - len(self._tiles), len(tiles))
